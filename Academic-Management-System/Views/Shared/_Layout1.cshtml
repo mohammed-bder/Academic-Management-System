@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>@ViewData["Title"] - Management System</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="/assets/css/main.css" rel="stylesheet">
+</head>
+
+<body class="index-page">
+
+    <header id="header" class="header d-flex align-items-center fixed-top" style="padding: 5px 0">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+            <a href="#hero" class="logo d-flex align-items-center">
+                <h1 class="sitename">AMS</h1>
+            </a>
+
+            <nav id="navmenu" class="navmenu">
+                <ul>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li><a asp-area="" asp-controller="Instructor" asp-action="GetAll">Instructors</a></li>
+                            <li><a asp-area="" asp-controller="Course" asp-action="GetAll">Courses</a></li>
+                            <li><a asp-area="" asp-controller="Trainee" asp-action="GetAll">Trainees</a></li>
+                            <li><a asp-area="" asp-controller="Role" asp-action="AddRole">Add Role</a></li>
+                        }
+                        else if (User.IsInRole("Instructor"))
+                        {
+                            <li><a asp-area="" asp-controller="Trainee" asp-action="GetAll">Trainees</a></li>
+                        }
+                        <li><a href="#contact">Welcome @User.Identity.Name</a></li>
+                        <li><a asp-controller="Account" asp-action="SignOut">Log Out</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a href="#about">Features</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a asp-controller="Account" asp-action="Login">Log In</a></li>
+                        <li><a asp-controller="Account" asp-action="Register">Sign Up</a></li>
+                    }
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+
+        </div>
+    </header>
+
+    <main class="main">
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero section dark-background">
+            <img src="/assets/img/hero-bg-2.jpg" alt="" class="hero-bg">
+
+            <div class="container">
+                <div class="row gy-4 justify-content-between">
+                    <div class="col-lg-4 order-lg-last hero-img" data-aos="zoom-out" data-aos-delay="100">
+                        <img src="~/Images/Photo1.JPG" class="img-fluid animated" alt="">
+                    </div>
+
+                    <div class="col-lg-6  d-flex flex-column justify-content-center" data-aos="fade-in">
+                        <h1>Academic Management <span>System</span> </h1>
+                        <p>My name is Mohammed Hassan, and I developed this project to effectively manage educational resources, utilizing the MVC architecture and Bootstrap for a seamless user experience.</p>
+                        <div class="d-flex">
+                            <a href="#about" class="btn-get-started">Get Started</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
+                <defs>
+                    <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+                </defs>
+                <g class="wave1">
+                    <use xlink:href="#wave-path" x="50" y="3"></use>
+                </g>
+                <g class="wave2">
+                    <use xlink:href="#wave-path" x="50" y="0"></use>
+                </g>
+                <g class="wave3">
+                    <use xlink:href="#wave-path" x="50" y="9"></use>
+                </g>
+            </svg>
+
+        </section><!-- /Hero Section -->
+        <!-- About Section -->
+        <section id="about" class="about section">
+
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+                <div class="row align-items-xl-center gy-5">
+
+                    <div class="col-xl-5 content">
+                        <h3>Features</h3>
+                        <h2>Welcome to our Academic management system, designed for efficient and secure academic resource management.</h2>
+                    </div>
+
+                    <div class="col-xl-7">
+                        <div class="row gy-4 icon-boxes">
+
+                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                                <div class="icon-box">
+                                    <i class="bi bi-file-earmark-text"></i>
+                                    <h3>Full-Scale Entity Management</h3>
+                                    <p>Seamless CRUD operations across multiple entities (Instructors, Courses, Trainees, Departments)
+                                       with intuitive interfaces for adding, editing, viewing, and deleting records, ensuring comprehensive data management.</p>
+                                </div>
+                            </div> <!-- End Icon Box -->
+
+                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+                                <div class="icon-box">
+                                    <i class="bi bi-shield-lock"></i>
+                                    <h3>Secure Authentication & Authorization</h3>
+                                    <p>Integrated user authentication with role-based access control,
+                                       ensuring that only authorized users can perform sensitive operations, providing an additional layer of security.</p>
+                                </div>
+                            </div> <!-- End Icon Box -->
+
+                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+                                <div class="icon-box">
+                                    <i class="bi bi-server"></i>
+                                    <h3>Efficient Database Handling with Entity Framework</h3>
+                                    <p>Leveraging Entity Framework for high-performance data handling and LINQ-based queries, ensuring optimized interaction with SQL Server for real-time data processing.</p>
+                                </div>
+                            </div> <!-- End Icon Box -->
+
+                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
+                                <div class="icon-box">
+                                    <i class="bi bi-speedometer2"></i>
+                                    <h3>Responsive and Dynamic Dashboard</h3>
+                                    <p>A visually appealing and fully responsive dashboard that centralizes all operations, providing users with a streamlined experience for managing academic resources, all while adapting seamlessly to various devices.</p>
+                                </div>
+                            </div> <!-- End Icon Box -->
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="container">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+
+        </section><!-- /About Section -->
+        <!-- Contact Section -->
+        <section id="contact" class="contact section">
+
+            <!-- Section Title -->
+            <div class="container section-title" data-aos="fade-up">
+                <h2>Contact</h2>
+                <div><span>Check Our</span> <span class="description-title">Contact</span></div>
+            </div><!-- End Section Title -->
+
+            <div class="container" data-aos="fade" data-aos-delay="100">
+
+                <div class="row gy-4">
+
+                    <div class="col-lg-4">
+                        <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+                            <i class="bi bi-geo-alt flex-shrink-0"></i>
+                            <div>
+                                <h3>Address</h3>
+                                <p>Cairo, Egypt</p>
+                            </div>
+                        </div><!-- End Info Item -->
+
+                        <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+                            <i class="bi bi-telephone flex-shrink-0"></i>
+                            <div>
+                                <h3>Call Us</h3>
+                                <p>+20 111 8391 368</p>
+                            </div>
+                        </div><!-- End Info Item -->
+
+                        <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+                            <i class="bi bi-envelope flex-shrink-0"></i>
+                            <div>
+                                <h3>Email Us</h3>
+                                <p>mohasanbder@gmail.com</p>
+                            </div>
+                        </div><!-- End Info Item -->
+
+                    </div>
+
+                    <div class="col-lg-8">
+                        <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+                            <div class="row gy-4">
+
+                                <div class="col-md-6">
+                                    <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                                </div>
+
+                                <div class="col-md-6 ">
+                                    <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                                </div>
+
+                                <div class="col-md-12 text-center">
+                                    <div class="loading">Loading</div>
+                                    <div class="error-message"></div>
+                                    <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                                    <button type="submit">Send Message</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div><!-- End Contact Form -->
+
+                </div>
+
+            </div>
+
+        </section><!-- /Contact Section -->
+
+    </main>
+
+    <footer id="footer" class="footer dark-background">
+
+        <div class="container copyright text-center mt-4">
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">Mohammed Hassan</strong> <span>All Rights Reserved</span></p>
+            <div class="credits">
+                Designed by Mohammed Hassan
+            </div>
+        </div>
+
+    </footer>
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Main JS File -->
+    <script src="/assets/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

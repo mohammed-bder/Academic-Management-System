@@ -1,0 +1,51 @@
+﻿@model TraineeWithCourseResultsViewModel
+
+<h2 class="text-center">Course Results for @Model.Name</h2>
+
+<div class="container mt-4">
+    <!-- Row to contain both card and table -->
+    <div class="row">
+        <!-- Left column for the card -->
+        <div class="col-md-6">
+            <div class="card" style="width: 75%;">
+                <img src="~/Images/@Model.ImgURL" class="card-img-top" alt="Trainee Photo">
+                <div class="card-body">
+                    <h5 class="card-title text-center">@Model.Name</h5>
+                    <p class="card-text">
+                        <strong>Address:</strong> @Model.Address<br>
+                        <strong>Grade:</strong> @Model.Grade<br>
+                        <strong>Department Id:</strong> @Model.DepartmentId<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right column for the table -->
+        <div class="col-md-6">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Grade</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model.CourseResults)
+                    {
+                        <tr>
+                            <td>@course.CourseName</td>
+                            <td>@course.Degree</td>
+                            <td>@course.State</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Back to List Button -->
+    <div class="container mt-3 d-flex justify-content-center">
+        <a href="/Trainee/GetAll" class="btn btn-primary">Back to List</a>
+    </div>
+</div>

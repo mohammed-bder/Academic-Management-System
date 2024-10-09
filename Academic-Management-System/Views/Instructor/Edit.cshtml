@@ -1,0 +1,143 @@
+﻿@model InstWithCourseListAndDeptList
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="text-center mb-4">Edit Instructor Information</h1>
+
+<div class="container" style="max-width: 600px;">
+    <!-- Add enctype for file upload -->
+    <form id="editForm" asp-action="SaveEdit" asp-controller="Instructor" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data">
+
+        <!-- Name -->
+        <div class="form-group">
+            <label for="Name">Name</label>
+            <input type="text" id="Name" name="Name" value="@Model?.Name" class="form-control" placeholder="Enter Name">
+        </div>
+
+        <!-- Current Image -->
+        <div class="form-group">
+            <label for="CurrentImage">Current Image</label><br />
+            <img src="~/Images/@Model.ImgURL" style="width: 80px;" alt="Instructor Image" />
+        </div>
+
+        <!-- New Image Upload -->
+        <div class="form-group">
+            <label for="ImgUpload">Upload New Image</label>
+            <input type="file" id="ImgUpload" name="ImgUpload" class="form-control" accept="image/*">
+        </div>
+
+        <!-- Salary -->
+        <div class="form-group">
+            <label for="Salary">Salary</label>
+            <input type="number" id="Salary" name="Salary" value="@Model?.Salary" class="form-control" placeholder="Enter Salary">
+        </div>
+
+        <!-- Address -->
+        <div class="form-group">
+            <label for="Address">Address</label>
+            <input type="text" id="Address" name="Address" value="@Model?.Address" class="form-control" placeholder="Enter Address">
+        </div>
+
+        <!-- Department List -->
+        <div class="form-group">
+            <label for="DepartmentId">Department</label>
+            <select id="DepartmentId" name="DepartmentId" class="form-control">
+                @foreach (var item in Model.DeptList)
+                {
+                    if (Model.DepartmentId == item.Id)
+                    {
+                        <option value="@item.Id" selected>@item.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <!-- Course List -->
+        <div class="form-group">
+            <label for="CourseId">Course</label>
+            <select id="CourseId" name="CourseId" class="form-control">
+                @foreach (var item in Model.CourseList)
+                {
+                    if (Model.CourseId == item.Id)
+                    {
+                        <option value="@item.Id" selected>@item.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center mt-4">
+            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#editConfirmModal">Save Changes</button>
+        </div>
+
+    </form>
+
+    <!-- Back to List Button -->
+    <div class="text-center mt-3">
+        <a href="/Instructor/GetAll" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+
+<!-- Edit Confirmation Modal -->
+<div class="modal fade" id="editConfirmModal" tabindex="-1" role="dialog" aria-labelledby="editConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editConfirmModalLabel">Confirm Save Changes</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to save the changes made to the instructor's information?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="confirmEditButton">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for Edit Confirmation Modal -->
+<script>
+    document.getElementById('confirmEditButton').addEventListener('click', function () {
+        document.getElementById('editForm').submit();
+    });
+</script>
+
+<!-- Hover Effect CSS -->
+<style>
+    .btn-primary:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+        border-color: #004080;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+        }
+
+    label {
+        font-weight: bold;
+    }
+
+    input::placeholder, select {
+        color: #6c757d;
+    }
+</style>

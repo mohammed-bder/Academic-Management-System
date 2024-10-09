@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Task02_MVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm fixed-top" style="background-color: #10058c; border-bottom: 1px solid #ddd; box-shadow: 0 4px 2px -2px gray; margin-bottom: 3rem;">
+            <div class="container-fluid">
+                <!-- Add a left margin to the title -->
+                <a class="navbar-brand ms-5 text-white" asp-area="" asp-controller="Home" asp-action="Index">Academic Management System</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Align buttons to the right with a right margin -->
+                <div class="collapse navbar-collapse d-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1"></ul> <!-- Empty ul for spacing -->
+                    <ul class="navbar-nav ms-auto me-5">
+                        <li class="nav-item me-4">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item me-4">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Instructor" asp-action="GetAll">Instructors</a>
+                                </li>
+                                <li class="nav-item me-4">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Course" asp-action="GetAll">Courses</a>
+                                </li>
+                                <li class="nav-item me-4">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Trainee" asp-action="GetAll">Trainees</a>
+                                </li>
+                                <li class="nav-item me-4">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Role" asp-action="AddRole">Add Role</a>
+                                </li>
+                            }
+                            else if (User.IsInRole("Instructor"))
+                            {
+                                <li class="nav-item me-4">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Trainee" asp-action="GetAll">Trainees</a>
+                                </li>
+                            }
+
+                            <!-- User photo and welcome message -->
+                            <li class="nav-item d-flex align-items-center me-4">
+                                <img src="/Images/Photo1.JPG" alt="User Photo" class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover; margin-right: 10px;">
+                                <span class="text-white">Welcome @User.Identity.Name</span>
+                            </li>
+
+                            <li class="nav-item me-4">
+                                <form asp-area="" asp-controller="Account" asp-action="SignOut" method="post">
+                                    <button type="submit" class="btn btn-link nav-link text-white">Log Out</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer text-white" style="background-color: #10058c; padding: 1px 0; border-top: none;">
+        <div class="container text-center">
+            Copyright &copy; reserved for Mohammed Hassan @DateTime.Now.Year
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
