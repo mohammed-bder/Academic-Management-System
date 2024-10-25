@@ -5,7 +5,7 @@
     int index = 1;
 }
 
-<h1 class="text-center">All Instructors</h1>
+<h1 class="text-center fw-bold text-primary">All Instructors</h1>
 <hr />
 <br />
 
@@ -18,34 +18,34 @@
     </form>
 
     <!-- Add button -->
-    <a href="/Instructor/Add" class="btn btn-success" style="width: 120px; height: 40px; border-radius: 10px;">Add</a>
+    <a href="/Instructor/Add" class="btn btn-success" style="width: 150px; height: 40px; border-radius: 10px;"> <i class="bi bi-plus-circle"></i> Add Instructor</a>
 </div>
 
 <table class="table table-bordered table-hover">
     <thead>
-        <tr class="text-center">
+        <tr class="text-center bg-primary text-white" style="letter-spacing: 1px;">
             <th>Id</th>
             <th>Name</th>
-            <th>Img</th>
+            <th>Image</th>
             <th>Salary</th>
             <th>Address</th>
             <th>Course Id</th>
             <th>Department Id</th>
-            <th>Details</th> 
-            <th>Edit</th>    
-            <th>Delete</th>  
+            <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
 
     <tbody class="text-center">
         @foreach (var instructor in Model)
         {
-            <tr>
+            <tr class="table-light" style="transition: background-color 0.3s ease;">
                 <td>@index</td>
                 <td>@instructor.Name</td>
                 <td>
                     <img src="~/Images/@(string.IsNullOrEmpty(instructor.ImgURL) ? "1.png" : instructor.ImgURL)"
-                         style="width:80px;"
+                         style="width:80px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"
                          alt="@instructor.Name's photo" />
                 </td>
                 <td>@instructor.Salary</td>
@@ -54,19 +54,19 @@
                 <td>@instructor.DepartmentId</td>
                 <td>
                     <!-- Details Button -->
-                    <a href="/Instructor/GetDetails/@instructor.Id" class="btn btn-info" style="width: 100px; height: 40px; border-radius: 10px;">
-                        <i class="fa-solid fa-circle-info"></i>Details
+                    <a href="/Instructor/GetDetails/@instructor.Id" class="btn btn-info" style="width: 110px; height: 45px; border-radius: 8px; margin-right: 5px;">
+                        <i class="fa-solid fa-circle-info"></i> Details
                     </a>
                 </td>
                 <td>
                     <!-- Edit Button -->
-                    <a href="/Instructor/Edit/@instructor.Id" class="btn btn-warning" style="width: 100px; height: 40px; border-radius: 10px;">
+                    <a href="/Instructor/Edit/@instructor.Id" class="btn btn-warning" style="width: 110px; height: 45px; border-radius: 8px; margin-right: 5px;">
                         <i class="fa-solid fa-pen-to-square"></i> Edit
                     </a>
                 </td>
                 <td>
                     <!-- Delete Button -->
-                    <button type="button" class="btn btn-danger" style="width: 100px; height: 40px; border-radius: 10px;"
+                    <button type="button" class="btn btn-danger" style="width: 110px; height: 45px; border-radius: 8px;"
                             onclick="showDeleteModal(@instructor.Id)">
                         <i class="fa-solid fa-trash"></i> Delete
                     </button>
@@ -77,6 +77,7 @@
         }
     </tbody>
 </table>
+
 
 <!-- Delete Confirmation Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">

@@ -4,11 +4,12 @@
     ViewData["Title"] = "Add Role";
 }
 
-<h1 class="text-center">Add Role</h1>
+<h1 class="text-center mb-4 fw-bold text-primary">Add Role</h1>
 <hr />
+<br />
 
-<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-    <div class="card shadow-sm p-4" style="width: 100%; max-width: 400px; border-radius: 10px;">
+<div class="d-flex justify-content-center align-items-center" style="min-height: 30vh;">
+    <div class="card shadow" style="width: 100%; max-width: 500px; border-radius: 10px;">
         @* Display success message if it exists *@
         @if (TempData["SuccessMessage"] != null)
         {
@@ -17,22 +18,24 @@
             </div>
         }
 
-        <form asp-action="SaveRole" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="card-body">
+            <form asp-action="SaveRole" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
 
-            <div class="form-group mb-3">
-                <label asp-for="RoleName" class="form-label"></label>
-                <input asp-for="RoleName" class="form-control" placeholder="Enter role name" />
-                <span asp-validation-for="RoleName" class="text-danger"></span>
+                <div class="form-group mb-3">
+                    <label asp-for="RoleName" class="form-label"></label>
+                    <input asp-for="RoleName" class="form-control" placeholder="Enter role name" />
+                    <span asp-validation-for="RoleName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group d-grid">
+                    <input type="submit" value="Create" class="btn btn-primary btn-lg" style="border-radius: 5px;" />
+                </div>
+            </form>
+
+            <div class="text-center mt-3">
+                <a asp-action="Index" asp-controller="Home" class="text-decoration-none" style="color: #007bff;">Back to List</a>
             </div>
-
-            <div class="form-group d-grid">
-                <input type="submit" value="Create" class="btn btn-primary btn-lg" style="border-radius: 5px;" />
-            </div>
-        </form>
-
-        <div class="text-center mt-3">
-            <a asp-action="Index" asp-controller="Home" class="text-decoration-none" style="color: #007bff;">Back to List</a>
         </div>
     </div>
 </div>
@@ -42,3 +45,27 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+<!-- Custom CSS for additional styling -->
+<style>
+    .card {
+        transition: box-shadow 0.3s;
+    }
+
+    .card:hover {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+        border-color: #004080;
+    }
+
+    input::placeholder {
+        color: #6c757d; /* Placeholder color */
+    }
+
+    label {
+        font-weight: bold; /* Bold labels */
+    }
+</style>

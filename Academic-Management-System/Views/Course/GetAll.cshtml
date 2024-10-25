@@ -5,68 +5,74 @@
     int index = 1;
 }
 
-<h1 class="text-center">All Courses</h1>
+<h1 class="text-center fw-bold text-primary">All Courses</h1>
 <hr />
 <br />
 
 <div class="d-flex justify-content-between mb-3">
-
     <!-- Search form -->
     <form class="form-inline d-flex w-50" method="get" asp-action="Search" asp-controller="Course">
         <input type="text" name="Name" class="form-control" style="border-radius: 12px; width: 52%;" placeholder="Search by name" value="@ViewBag.Name" />
-        <button type="submit" class="btn btn-primary" style="width: 124px; height: 40px; border-radius: 10px; margin-left: 12px;">Search</button>
+        <button type="submit" class="btn btn-primary" style="width: 124px; height: 40px; border-radius: 10px; margin-left: 12px;">
+            <i class="bi bi-search"></i> Search
+        </button>
     </form>
 
     <!-- Add button -->
-    <a href="/Course/Add" class="btn btn-success" style="width: 120px; height: 40px; border-radius: 10px;">Add Course</a>
+    <a href="/Course/Add" class="btn btn-success" style="width: 144px; height: 40px; border-radius: 10px;">
+        <i class="bi bi-plus-circle"></i> Add Course
+    </a>
 </div>
 
 <table class="table table-hover table-bordered">
-    <tr class="text-center">
-        <th>Id</th>
-        <th>Name</th>
-        <th>Degree</th>
-        <th>Mindegree</th>
-        <th>Hours</th>
-        <th>DepartmentId</th>
-        <th>Details</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    @foreach (var crs in Model)
-    {
-        <tr class="text-center">
-            <td>@index</td>
-            <td>@crs.Name</td>
-            <td>@crs.Degree</td>
-            <td>@crs.MinDegree</td>
-            <td>@crs.CourseHours</td>
-            <td>@crs.DepartmentId</td>
-            <td>
-                <!-- Details Button -->
-                <a href="/Course/GetDetails/@crs.Id" class="btn btn-info" style="width: 100px; height: 40px; border-radius: 10px;">
-                    <i class="fa-solid fa-circle-info"></i>Details
-                </a>
-            </td>
-
-            <td>
-                <!-- Edit Button -->
-                <a href="/Course/Edit/@crs.Id" class="btn btn-warning" style="width: 100px; height: 40px; border-radius: 10px;">
-                    <i class="fa-solid fa-pen-to-square"></i> Edit
-                </a>
-
-            </td>
-
-            <td>
-                <!-- Delete Button -->
-                <button type="button" class="btn btn-danger" style="width: 100px; height: 40px; border-radius: 10px;"
-                        onclick="showDeleteModal(@crs.Id)">
-                    <i class="fa-solid fa-trash"></i> Delete
-                </button>
-            </td>
+    <thead class="bg-primary text-white">
+        <tr class="text-center" style="letter-spacing: 1px;">
+            <th>Id</th>
+            <th>Name</th>
+            <th>Degree</th>
+            <th>Mindegree</th>
+            <th>Hours</th>
+            <th>DepartmentId</th>
+            <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
-        ++index;
-    }
+    </thead>
+    <tbody>
+        @foreach (var crs in Model)
+        {
+            <tr class="text-center table-light" style="transition: background-color 0.3s ease;">
+                <td>@index</td>
+                <td>@crs.Name</td>
+                <td>@crs.Degree</td>
+                <td>@crs.MinDegree</td>
+                <td>@crs.CourseHours</td>
+                <td>@crs.DepartmentId</td>
+                <td>
+                    <!-- Details Button -->
+                    <a href="/Course/GetDetails/@crs.Id" class="btn btn-info" style="width: 100px; height: 40px; border-radius: 10px;">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </a>
+                </td>
+
+                <td>
+                    <!-- Edit Button -->
+                    <a href="/Course/Edit/@crs.Id" class="btn btn-warning" style="width: 100px; height: 40px; border-radius: 10px;">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                </td>
+
+                <td>
+                    <!-- Delete Button -->
+                    <button type="button" class="btn btn-danger" style="width: 100px; height: 40px; border-radius: 10px;"
+                            onclick="showDeleteModal(@crs.Id)">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+            ++index;
+        }
+    </tbody>
 </table>
 
 <!-- Delete Confirmation Modal -->
@@ -100,9 +106,7 @@
         deleteModal.show();
     }
 
-
     document.getElementById('confirmDeleteButton').addEventListener('click', function () {
-
         var form = document.createElement('form');
         form.method = 'post';
         form.action = '/Course/Delete/' + courseIdToDelete;

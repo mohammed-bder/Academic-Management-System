@@ -3,14 +3,14 @@
     ViewData["Title"] = "GetDetails";
 }
 
-<h1 class="text-center">Trainee Details</h1>
+<h1 class="text-center fw-bold text-primary">Trainee Details</h1>
 
 <div class="container mt-4 d-flex justify-content-center">
     <!-- Center the card and make it wider -->
-    <div class="card shadow" style="width: 30rem;  border-radius: 10px; ">
-        <img src="~/Images/@Model.ImgURL" class="card-img-top" alt="Instructor Photo">
+    <div class="card shadow" style="width: 35rem; border-radius: 15px;">
+        <img src="~/Images/@Model.ImgURL" class="card-img-top" alt="@Model.Name's Photo" style="border-top-left-radius: 15px; border-top-right-radius: 15px; height: 400px; object-fit: cover;">
         <div class="card-body">
-            <h5 class="card-title text-center">@Model.Name</h5>
+            <h5 class="card-title text-center text-uppercase">@Model.Name</h5>
             <p class="card-text">
                 <strong>Address:</strong> @Model.Address<br>
                 <strong>Grade:</strong> @Model.Grade<br>
@@ -22,5 +22,7 @@
 
 <!-- Back to List Button -->
 <div class="container mt-3 d-flex justify-content-center">
-    <a href="/Instructor/GetAll" class="btn btn-primary">Back to List</a>
+    <a href="/Trainee/GetAll" class="btn btn-primary" style="width: 130px; height: 40px; border-radius: 10px;">
+        <i class="bi bi-arrow-left"></i> Back to List
+    </a>
 </div>

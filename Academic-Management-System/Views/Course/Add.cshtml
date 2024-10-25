@@ -4,58 +4,64 @@
     ViewData["Title"] = "Add Course";
 }
 
-<h1 class="text-center mb-4">Add Course</h1>
+<h1 class="text-center mb-4 fw-bold text-primary">Add Course</h1>
+<hr />
+<br />
+<div class="container mt-4 d-flex justify-content-center">
+    <!-- Card for the Add Course form with increased width -->
+    <div class="card shadow" style="width: 40rem; border-radius: 10px;">
+        <div class="card-body">
+            <form action="/Course/SaveAdd" method="post">
 
-<div class="container" style="max-width: 600px;">
-    <form action="/Course/SaveAdd" method="post">
+                <!-- Name -->
+                <div class="form-group mb-3">
+                    <label for="Name">Name</label>
+                    <input type="text" id="Name" name="Name" value="@Model?.Name" class="form-control" placeholder="Enter Name">
+                </div>
 
-        <!-- Name -->
-        <div class="form-group">
-            <label for="Name">Name</label>
-            <input type="text" id="Name" name="Name" value="@Model?.Name" class="form-control" placeholder="Enter Name">
+                <!-- Degree -->
+                <div class="form-group mb-3">
+                    <label for="Degree">Degree</label>
+                    <input type="number" id="Degree" name="Degree" class="form-control" placeholder="Enter Degree">
+                </div>
+
+                <!-- MinDegree -->
+                <div class="form-group mb-3">
+                    <label for="MinDegree">Min Degree</label>
+                    <input type="number" id="MinDegree" name="MinDegree" class="form-control" placeholder="Enter Min Degree">
+                </div>
+
+                <!-- CourseHours -->
+                <div class="form-group mb-3">
+                    <label for="CourseHours">Course Hours</label>
+                    <input type="number" id="CourseHours" name="CourseHours" class="form-control" placeholder="Enter Course Hours">
+                </div>
+
+                <!-- Department List -->
+                <div class="form-group mb-3">
+                    <label for="DepartmentId">Department</label>
+                    <select id="DepartmentId" name="DepartmentId" class="form-control">
+                        <option value="0">-- Select Department --</option>
+                        @foreach (var item in Model.DeptList)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center mt-4">
+                    <input type="submit" value="Save" class="btn btn-primary btn-lg" />
+                </div>
+
+            </form>
         </div>
-
-        <!-- Degree -->
-        <div class="form-group">
-            <label for="Degree">Degree</label>
-            <input type="number" id="Degree" name="Degree"  class="form-control" placeholder="Enter Degree">
-        </div>
-
-        <!-- MinDegree -->
-        <div class="form-group">
-            <label for="MinDegree">MinDegree</label>
-            <input type="number" id="MinDegree" name="MinDegree"  class="form-control" placeholder="Enter MinDegree">
-        </div>
-
-        <!-- CourseHours -->
-        <div class="form-group">
-            <label for="CourseHours">CourseHours</label>
-            <input type="number" id="CourseHours" name="CourseHours" class="form-control" placeholder="Enter CourseHours">
-        </div>
-
-        <!-- Department List -->
-        <div class="form-group">
-            <label for="DepartmentId">Department</label>
-            <select id="DepartmentId" name="DepartmentId" class="form-control">
-                <option value="0">-- Select Department --</option>
-                @foreach (var item in Model.DeptList)
-                {
-                    <option value="@item.Id">@item.Name</option>
-                }
-            </select>
-        </div>
-
-        <!-- Submit Button -->
-        <div class="text-center mt-4">
-            <input type="submit" value="Save" class="btn btn-primary btn-lg" />
-        </div>
-
-    </form>
-
-    <!-- Back to List Button -->
-    <div class="text-center mt-3">
-        <a href="/Course/GetAll" class="btn btn-secondary">Back to List</a>
     </div>
+</div>
+
+<!-- Back to List Button -->
+<div class="container mt-3 d-flex justify-content-center">
+    <a href="/Course/GetAll" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Back to List</a>
 </div>
 
 <!-- Hover Effect CSS -->
