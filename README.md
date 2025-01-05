@@ -30,3 +30,9 @@ A comprehensive **Academic Management System** designed to streamline academic o
 - Advanced experience with **ASP.NET MVC** and **Entity Framework**.  
 - Hands-on practice in implementing **authentication systems**.  
 - Developed a deep understanding of **CRUD operations** and **database management**.  
+
+## 🔗 Project Demo  
+![Project Demo 1](https://github.com/user-attachments/assets/700d1edf-1836-48d3-a7d3-eb5235fc365d)
+![Project Demo 2](https://github.com/user-attachments/assets/d3d1b395-1ced-4a23-aa58-e7a504924a77)
+![Project Demo 3](https://github.com/user-attachments/assets/2f504877-aa2e-4d95-88c2-344f2bcf0aad)
+
